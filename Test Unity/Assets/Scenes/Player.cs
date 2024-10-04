@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float forceMin = 5f;
     public float forceMax = 10f;
 
-    public int health = 3;
+    public int health = 1;
     public float scale = 1.5f;
     public PlayerMaker maker;
 
@@ -28,8 +28,10 @@ public class Player : MonoBehaviour
         rigidBody.AddForce(dir * force);
 
         if ((maker.startGame) && (collision.gameObject.GetComponent<Player>())) {
-            collision.gameObject.GetComponent<Player>().health--;
-            transform.localScale = new Vector3(transform.localScale.x*scale,transform.localScale.y*scale,transform.localScale.z*scale);
+            if (collision.gameObject.transform.localScale.x < transform.localScale.x) {
+                collision.gameObject.GetComponent<Player>().health--;
+                transform.localScale = new Vector3(transform.localScale.x*scale,transform.localScale.y*scale,transform.localScale.z*scale);
+            }
         }
     }
 

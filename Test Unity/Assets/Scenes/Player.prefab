@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3937477903641807282}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceMin: 50
   forceMax: 100
-  health: 3
-  scale: 2
+  health: 1
+  scale: 1.1
   maker: {fileID: 0}
 --- !u!54 &3937477903641807282
 Rigidbody:
