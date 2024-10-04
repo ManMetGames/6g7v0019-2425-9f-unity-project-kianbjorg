@@ -121,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceMin: 50
   forceMax: 100
+  health: 3
+  scale: 2
+  maker: {fileID: 0}
 --- !u!54 &3937477903641807282
 Rigidbody:
   m_ObjectHideFlags: 0
