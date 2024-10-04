@@ -9,6 +9,8 @@ public class PlayerMaker : MonoBehaviour
     public float cooldownAverage = 30;
     public GameObject prefab;
 
+    public bool gameStart = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,8 @@ public class PlayerMaker : MonoBehaviour
     {
         if (cooldown > 0) cooldown--; else {
             cooldown = Random.Range(cooldownAverage-15,cooldownAverage+15);
-            Instantiate(prefab, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            GameObject sphere = Instantiate(prefab, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+            sphere.
         }
     }
 }
