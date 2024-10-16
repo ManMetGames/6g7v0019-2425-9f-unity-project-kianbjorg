@@ -31,6 +31,9 @@ public class PlayerMaker : MonoBehaviour
     public int betVal;
     public float betCooldown = 3;
 
+    public Button clash;
+    public float clashCool = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +48,13 @@ public class PlayerMaker : MonoBehaviour
         colButtons[0].onClick.AddListener(colR);
         colButtons[1].onClick.AddListener(colG);
         colButtons[2].onClick.AddListener(colB);
+        clash.onClick.AddListener(clashPress);
         colButtons[3].GetComponent<Image>().color = new Color(1,1,1,0);
         betSlider.gameObject.SetActive(false);
         betText.gameObject.SetActive(false);
         betAmount.gameObject.SetActive(false);
         betView.gameObject.SetActive(false);
+        clash.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,6 +75,7 @@ public class PlayerMaker : MonoBehaviour
                     betView.gameObject.SetActive(false);
                     betView.text = "";
                     colButtons[3].GetComponent<Image>().color = new Color(1,1,1,0);
+                    clashCool = 5;
                 }
             } else if (numObj <= 1) {
                 GameObject obj = GameObject.FindGameObjectWithTag("Player");
@@ -82,6 +88,11 @@ public class PlayerMaker : MonoBehaviour
                     winText.text = "You lost...";
                 }
                 betCooldown -= Time.deltaTime;
+                clash.gameObject.SetActive(false);
+            } else {
+                if (clashCool > 0) clashCool -= Time.deltaTime; else {
+                    clash.gameObject.SetActive(true);
+                }
             }
         } else {
             if (cooldownAmount > 0) {
@@ -148,6 +159,15 @@ public class PlayerMaker : MonoBehaviour
             for (var i = 0; i < 3; i++) colButtons[i].GetComponent<Image>().color = new Color(colButtons[i].GetComponent<Image>().color.r,colButtons[i].GetComponent<Image>().color.g,colButtons[i].GetComponent<Image>().color.b,0.3f);
             colButtons[2].GetComponent<Image>().color = new Color(colButtons[2].GetComponent<Image>().color.r,colButtons[2].GetComponent<Image>().color.g,colButtons[2].GetComponent<Image>().color.b,1f);
             colSelected = 2;
+        }
+    }
+
+    void clashPress(){
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        for (var i = 0; i < GameObject.FindObjectsOfType(typeof(Player)).Length; i++) {
+            Vector3 dir = new Vector3(Random.Range(0,360),Random.Range(0,360),Random.Range(0,360));
+            float force = Random.Range(5,10);
+            objs[i].GetComponent<Rigidbody>().AddForce(dir * force);
         }
     }
 }
